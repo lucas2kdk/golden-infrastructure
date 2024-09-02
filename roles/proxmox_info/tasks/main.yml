@@ -1,0 +1,24 @@
+---
+- name: Gather system information
+  shell: uname -a
+  register: system_info
+
+- name: Display system information
+  debug:
+    msg: "System Information: {{ system_info.stdout }}"
+
+- name: Gather Proxmox VE version
+  command: pveversion
+  register: proxmox_version
+
+- name: Display Proxmox VE version
+  debug:
+    msg: "Proxmox VE Version: {{ proxmox_version.stdout }}"
+
+- name: List all VMs
+  shell: qm list
+  register: vm_list
+
+- name: Display VM list
+  debug:
+    msg: "VM List: {{ vm_list.stdout_lines }}"
